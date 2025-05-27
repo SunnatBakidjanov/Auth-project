@@ -1,6 +1,12 @@
-import './reset.scss';
+import { Layout } from '../layout/Layout';
+import { Login } from '../pages/login/Login';
 import './main.scss';
+import './reset.scss';
 
 export const App = () => {
-	return <div>Hello World</div>;
+	return (
+		<Layout>
+			<Login />
+		</Layout>
+	);
 };

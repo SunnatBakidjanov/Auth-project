@@ -1,5 +1,28 @@
+:root {
+	--main-font-color: black;
+	--accent-font-color: white;
+	--link-font-color: #4a90e2;
+	--sign-button-bg-color: #4a90e2;
+}
+
 .container {
 	margin: 0 auto;
 	padding: 0 15px;
-	max-width: 1440px;
+	width: 1440px;
+}
+
+@font-face {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 400;
+	src: url('/frontend/public/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf') format('opentype');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Furore;
+	font-style: normal;
+	font-weight: 600;
+	src: url('/frontend/public/assets/fonts/Furore/Furore.otf') format('opentype');
+	font-display: swap;
 }

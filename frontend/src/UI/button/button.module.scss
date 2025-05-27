@@ -1,0 +1,14 @@
+.signInForm {
+	padding: 0.75rem 1rem;
+	font-size: 1.2em;
+	color: var(--accent-font-color);
+	letter-spacing: 0.5px;
+	background-color: var(--sign-button-bg-color);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+
+	&:hover {
+		background-color: #357ac9;
+	}
+}
