@@ -1,4 +1,4 @@
-.signInForm {
+.signForm {
 	padding: 0.75rem 1rem;
 	font-size: 1.2em;
 	color: var(--accent-font-color);
@@ -10,5 +10,20 @@
 
 	&:hover {
 		background-color: #357ac9;
+	}
+}
+
+.link {
+	font-family: Furore, sans-serif;
+	font-weight: 600;
+	font-size: 1.2em;
+	color: var(--link-font-color);
+	text-decoration: underline;
+	cursor: pointer;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: #357ac9;
+		opacity: 0.7;
 	}
 }

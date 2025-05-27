@@ -1,6 +1,6 @@
 import { AuthForm } from '../../UI/authForm/AuthForm';
 import { MainTitle } from '../../UI/mainTitle/MainTitle';
-import { SignLink } from '../../UI/signUpLink/SignLink';
+import { SignLink } from '../../UI/signLink/SignLink';
 import styles from './login.module.scss';
 
 export const Login = () => {
@@ -9,8 +9,8 @@ export const Login = () => {
 			<div className="container">
 				<div className={styles.wrapper}>
 					<MainTitle text="THE APP" styleUsePlace={'loginUse'} />
-					<AuthForm showRememberCheckbox={true} titleText="Sign in to the App" />
-					<SignLink text="Don't have an account?" linkText="Sign Up" />
+					<AuthForm showRememberCheckbox={true} titleText="Sign in to the App" btnText="Sign In" />
+					<SignLink text="Don't have an account?" linkText="Sign Up" navigatePlace="/register" />
 				</div>
 			</div>
 		</section>

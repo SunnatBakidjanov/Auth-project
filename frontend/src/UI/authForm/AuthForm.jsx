@@ -1,7 +1,7 @@
 import { Button } from '../button/Button';
 import styles from './authForm.module.scss';
 
-export const AuthForm = ({ showRememberCheckbox, titleText }) => {
+export const AuthForm = ({ showRememberCheckbox, showRepeatpassword, titleText, btnText }) => {
 	return (
 		<div className={styles.wrapper}>
 			<form className={styles.form}>
@@ -17,14 +17,21 @@ export const AuthForm = ({ showRememberCheckbox, titleText }) => {
 					<input type="password" id="password" placeholder="Enter your password" required />
 				</div>
 
-				{showRememberCheckbox && (
-					<div className={styles.rememberMe}>
-						<input type="checkbox" id="remember" />
-						<label htmlFor="remember">Remember me</label>
+				{showRepeatpassword && (
+					<div className={styles.field}>
+						<label htmlFor="repeat-password">Repeat password</label>
+						<input type="password" id="repeat-password" placeholder="Repeat your password" />
 					</div>
 				)}
 
-				<Button type="submit" text="Sign In" styleUsePlace="signInForm" />
+				{showRememberCheckbox && (
+					<label className={styles.rememberMe} htmlFor="remember">
+						<input type="checkbox" id="remember" />
+						Remember me
+					</label>
+				)}
+
+				<Button type="submit" text={btnText} styleUsePlace="signForm" />
 			</form>
 		</div>
 	);

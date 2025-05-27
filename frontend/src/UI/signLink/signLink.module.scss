@@ -1,0 +1,11 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	column-gap: 5px;
+}
+
+.text {
+	line-height: 100%;
+	font-size: 1.2em;
+	color: var(--main-font-color);
+}
