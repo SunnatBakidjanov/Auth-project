@@ -1,7 +1,7 @@
-import { AuthForm } from '../../UI/authForm/AuthForm';
 import { MainTitle } from '../../UI/mainTitle/MainTitle';
 import { SignLink } from '../../UI/signLink/SignLink';
 import styles from './login.module.scss';
+import { SignInForm } from '../../UI/signInForm/signInForm';
 
 export const Login = () => {
 	return (
@@ -9,7 +9,7 @@ export const Login = () => {
 			<div className="container">
 				<div className={styles.wrapper}>
 					<MainTitle text="THE APP" styleUsePlace={'loginUse'} />
-					<AuthForm showRememberCheckbox={true} titleText="Sign in to the App" btnText="Sign In" />
+					<SignInForm titleText="Sign in to the App" btnText="Sign In" />
 					<SignLink text="Don't have an account?" linkText="Sign Up" navigatePlace="/register" />
 				</div>
 			</div>

@@ -1,29 +1,25 @@
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql2/promise');
-const dotenv = require('dotenv');
-
-dotenv.config();
+require('dotenv').config();
+const db = require('./db');
+const authRoutes = require('./routes/auth.routes');
+const loginRouter = require('./routes/login.routes');
 
 const app = express();
-const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createPool({
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	password: process.env.DB_PASS,
-	database: process.env.DB_NAME,
-});
+db.query('SELECT 1')
+	.then(() => console.log('Connected to MySQL'))
+	.catch(err => console.error('DB error:', err));
+
+app.use('/api/auth', authRoutes);
+app.use('/api/login', loginRouter);
 
 app.get('/', (req, res) => {
-	res.send('Auth microservice is running');
+	res.json({ message: 'Server is working and connected to DB!' });
 });
 
-app.listen(port, () => {
-	console.log(`Server is running on http://localhost:${port}`);
-});
-
-module.exports = { app, db };
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

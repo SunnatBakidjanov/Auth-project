@@ -1,4 +1,4 @@
-import { AuthForm } from '../../UI/authForm/AuthForm';
+import { SignUpForm } from '../../UI/signUpForm/SignUpForm';
 import { MainTitle } from '../../UI/mainTitle/MainTitle';
 import { SignLink } from '../../UI/signLink/SignLink';
 import styles from './register.module.scss';
@@ -9,7 +9,7 @@ export const Register = () => {
 			<div className="container">
 				<div className={styles.wrapper}>
 					<MainTitle text="THE APP" styleUsePlace={'loginUse'} />
-					<AuthForm showRepeatpassword={true} titleText="Sign Up for the App" btnText="Sign Up" />
+					<SignUpForm titleText="Sign Up for the App" btnText="Sign Up" />
 					<SignLink text="Do you already have an account?" linkText="Sign In" navigatePlace="/login" />
 				</div>
 			</div>
