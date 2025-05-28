@@ -1,0 +1,25 @@
+.wrapper {
+	margin-top: 2rem;
+}
+
+.toolbar {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+
+	th,
+	td {
+		padding: 0.75rem;
+		text-align: left;
+		border: 1px solid #ccc;
+	}
+}
+
+.ownerRow {
+	background-color: rgb(0 128 255 / 10%); // Светло-синий фон для владельца
+}
