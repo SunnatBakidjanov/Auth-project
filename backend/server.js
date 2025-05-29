@@ -3,7 +3,6 @@ const cors = require('cors');
 require('dotenv').config();
 const db = require('./db');
 const authRoutes = require('./routes/auth.routes');
-const loginRouter = require('./routes/login.routes');
 
 const app = express();
 
@@ -15,7 +14,6 @@ db.query('SELECT 1')
 	.catch(err => console.error('DB error:', err));
 
 app.use('/api/auth', authRoutes);
-app.use('/api/login', loginRouter);
 
 app.get('/', (req, res) => {
 	res.json({ message: 'Server is working and connected to DB!' });

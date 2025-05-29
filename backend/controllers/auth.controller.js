@@ -17,4 +17,21 @@ const register = async (req, res) => {
 	}
 };
 
-module.exports = { register };
+const login = async (req, res) => {
+	try {
+		const { email, password } = req.body;
+
+		const result = await authService.login({ email, password });
+
+		if (result.errors) {
+			return res.status(result.status).json({ errors: result.errors });
+		}
+
+		return res.status(result.status).json(result.data);
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({ errors: { message: 'Server error' } });
+	}
+};
+
+module.exports = { register, login };

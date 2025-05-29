@@ -65,7 +65,6 @@ export const useSignUpForm = () => {
 
 	const validate = () => {
 		const errors = {};
-		if (!state.name || !state.email || !state.password) errors.message = 'All fields are required';
 		if (!/\S+@\S+\.\S+/.test(state.email)) errors.email = 'Invalid email format';
 		if (state.password !== state.repeatPassword) errors.repeatPassword = 'Passwords do not match';
 
