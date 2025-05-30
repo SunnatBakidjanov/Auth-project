@@ -60,6 +60,10 @@ export const useSignInForm = () => {
 				password: state.password,
 			});
 
+			localStorage.removeItem('token');
+			sessionStorage.removeItem('token');
+			state.rememberMe ? localStorage.setItem('token', res.data.token) : sessionStorage.setItem('token', res.data.token);
+
 			dispatch({ type: ACTIONS.CLEAR_FORM });
 
 			navigate('/user-table');

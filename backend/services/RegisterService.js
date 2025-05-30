@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const db = require('../db');
 
-class AuthService {
+class RegisterService {
 	async validateRequired({ name, email, password }) {
 		if (!name || !email || !password) {
 			return { status: 400, errors: { message: 'All fields are required' } };
@@ -40,36 +40,6 @@ class AuthService {
 			},
 		};
 	}
-
-	async login({ email, password }) {
-		if (!email || !password) {
-			return { status: 400, errors: { message: 'Email and password are required' } };
-		}
-
-		const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-		if (users.length === 0) {
-			return { status: 401, errors: { message: 'Invalid email or password' } };
-		}
-
-		const user = users[0];
-
-		const isMatch = await bcrypt.compare(password, user.password);
-		if (!isMatch) {
-			return { status: 401, errors: { message: 'Invalid email or password' } };
-		}
-
-		return {
-			status: 200,
-			data: {
-				message: '✅ Login successful!',
-				user: {
-					id: user.id,
-					name: user.name,
-					email: user.email,
-				},
-			},
-		};
-	}
 }
 
-module.exports = new AuthService();
+module.exports = new RegisterService();
