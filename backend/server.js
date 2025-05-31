@@ -7,7 +7,13 @@ const userRoutes = require('./routes/user.routes');
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+	origin: 'https://auth-project-production-9c35.up.railway.app',
+	methods: ['GET', 'POST', 'PUT', 'DELETE'],
+	credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 db.query('SELECT 1')

@@ -55,7 +55,7 @@ export const useSignInForm = () => {
 
 	const handleSubmit = async () => {
 		try {
-			const res = await axios.post('http://localhost:3000/api/auth/login', {
+			const res = await axios.post('https://auth-project-production-9c35.up.railway.app/api/auth/login', {
 				email: state.email,
 				password: state.password,
 			});
