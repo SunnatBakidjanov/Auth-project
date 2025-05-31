@@ -37,7 +37,7 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			const token = getToken();
 			await Promise.all(
 				ids.map(id =>
-					axios.delete(`https://auth-project-production-9c35.up.railway.app/api/users/${id}`, {
+					axios.delete(`backend-production-1b8e.up.railway.app/api/users/${id}`, {
 						headers: { Authorization: `Bearer ${token}` },
 					})
 				)

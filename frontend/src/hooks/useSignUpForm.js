@@ -80,7 +80,7 @@ export const useSignUpForm = () => {
 		}
 
 		try {
-			const res = await axios.post('https://auth-project-production-9c35.up.railway.app/api/auth/register', {
+			const res = await axios.post('backend-production-1b8e.up.railway.app/api/auth/register', {
 				name: state.name,
 				email: state.email,
 				password: state.password,
