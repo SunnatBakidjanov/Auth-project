@@ -59,7 +59,7 @@ export const useUsers = () => {
 				const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 				if (!token) return;
 
-				const res = await axios.get('backend-production-1b8e.up.railway.app/api/users', {
+				const res = await axios.get('https://backend-production-1b8e.up.railway.app/api/users', {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 

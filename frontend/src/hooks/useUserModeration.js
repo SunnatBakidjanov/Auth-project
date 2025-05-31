@@ -11,7 +11,7 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			await Promise.all(
 				ids.map(id =>
 					axios.put(
-						`https://auth-project-production-9c35.up.railway.app/api/users/${id}/status`,
+						`https://auth-project-production-9de4.up.railway.app/api/users/${id}/status`,
 						{ status },
 						{
 							headers: { Authorization: `Bearer ${token}` },
