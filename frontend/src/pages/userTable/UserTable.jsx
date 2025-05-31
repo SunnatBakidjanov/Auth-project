@@ -4,92 +4,37 @@ import { useUsers } from '../../hooks/useUsers';
 import { useUserEmail } from '../../hooks/useUserEmail';
 import { Button } from '../../UI/button/Button';
 import { useSortUsers } from '../../hooks/useSortUsers';
+import { useUserModeration } from '../../hooks/useUserModeration';
+import { getTimeAgo } from './gitTimeAgo';
 import lockIcon from '../../../public/assets/imgs/lock.svg';
 import openLock from '../../../public/assets/imgs/open-lock.svg';
 import basket from '../../../public/assets/imgs/basket.svg';
-import { useState } from 'react';
-import axios from 'axios';
 
 export const UserTable = () => {
-	const { users, setUsers } = useUsers();
+	const { users, selectedUserIds, selectAll, dispatch } = useUsers();
 	const currentUserEmail = useUserEmail();
 	const { sortBy, sortDirection, sortField } = useSortUsers(users);
-	const [selectedUserIds, setSelectedUserIds] = useState([]);
-	const [selectAll, setSelectAll] = useState(false);
+	const { blockUsers, unblockUsers, deleteUsers } = useUserModeration(dispatch, currentUserEmail, users);
 
-	const updateUsers = async () => {
-		const response = await fetch('/users');
-		const updatedUsers = await response.json();
-		setUsers(updatedUsers);
-	};
-
-	const handleBlockUsers = async () => {
-		for (const userId of selectedUserIds) {
-			await axios.put(`http://localhost:3000/api/users/${userId}/status`, {
-				status: 'blocked',
-			});
-		}
-		await updateUsers();
-		setSelectedUserIds([]);
-	};
-
-	const handleUnlockUsers = async () => {
-		for (const userId of selectedUserIds) {
-			await axios.put(`http://localhost:3000/api/users/${userId}/status`, {
-				status: 'active',
-			});
-		}
-		await updateUsers();
-		setSelectedUserIds([]);
-	};
-
-	const handleDeleteUsers = async () => {
-		for (const userId of selectedUserIds) {
-			await axios.delete(`http://localhost:3000/api/users/${userId}`);
-		}
-		await updateUsers();
-		setSelectedUserIds([]);
+	const toggleSelectAll = () => {
+		dispatch({ type: 'TOGGLE_SELECT_ALL' });
 	};
 
 	const toggleUserSelection = userId => {
-		setSelectedUserIds(prev => (prev.includes(userId) ? prev.filter(id => id !== userId) : [...prev, userId]));
-	};
-
-	const toggleSelectAll = () => {
-		if (selectAll) {
-			setSelectedUserIds([]);
-		} else {
-			setSelectedUserIds(users.map(user => user.id));
-		}
-		setSelectAll(!selectAll);
-	};
-
-	const getTimeAgo = dateString => {
-		const now = new Date();
-		const past = new Date(dateString);
-		const diffMs = now - past;
-
-		const diffMinutes = Math.floor(diffMs / (1000 * 60));
-		const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-		const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-		if (diffMinutes < 1) return 'less then a minute ago';
-		if (diffMinutes < 60) return `${diffMinutes} minute${diffMinutes === 1 ? '' : 's'} ago`;
-		if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
-		return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+		dispatch({ type: 'TOGGLE_SELECT_ONE', payload: { id: userId } });
 	};
 
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.toolbar}>
-				<Button text="Block" styleUsePlace="blockBtn" onClick={handleBlockUsers}>
-					<img src={lockIcon} alt="" />
+				<Button text="Block" styleUsePlace="blockBtn" onClick={() => blockUsers(selectedUserIds)} disabled={selectedUserIds.length === 0}>
+					<img src={lockIcon} alt="Block" />
 				</Button>
-				<Button styleUsePlace="blockBtn" onClick={handleUnlockUsers}>
-					<img src={openLock} alt="" />
+				<Button styleUsePlace="blockBtn" onClick={() => unblockUsers(selectedUserIds)} disabled={selectedUserIds.length === 0}>
+					<img src={openLock} alt="Unlock" />
 				</Button>
-				<Button styleUsePlace="bascketBtn" onClick={handleDeleteUsers}>
-					<img src={basket} alt="" />
+				<Button styleUsePlace="bascketBtn" onClick={() => deleteUsers(selectedUserIds)} disabled={selectedUserIds.length === 0}>
+					<img src={basket} alt="Delete" />
 				</Button>
 			</div>
 

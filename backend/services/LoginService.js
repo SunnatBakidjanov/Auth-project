@@ -21,6 +21,10 @@ class LoginService {
 			return { status: 401, errors: { message: 'Invalid email or password' } };
 		}
 
+		if (user.status !== 'active') {
+			return { status: 401, errors: { message: 'Account is blocked' } };
+		}
+
 		await db.query('UPDATE users SET last_login = NOW() WHERE id = ?', [user.id]);
 
 		const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
