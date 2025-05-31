@@ -1,7 +1,7 @@
 import { MainTitle } from '../../UI/mainTitle/MainTitle';
 import { SignLink } from '../../UI/signLink/SignLink';
 import styles from './login.module.scss';
-import { SignInForm } from '../../UI/signInForm/signInForm';
+import { SignInForm } from '../../UI/signInForm/SignInForm';
 
 export const Login = () => {
 	return (
