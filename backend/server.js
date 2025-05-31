@@ -8,7 +8,7 @@ const userRoutes = require('./routes/user.routes');
 const app = express();
 
 const corsOptions = {
-	origin: 'https://auth-project-production-9de4.up.railway.app',
+	origin: 'https://frontend-production-95e5.up.railway.app',
 	methods: ['GET', 'POST', 'PUT', 'DELETE'],
 	credentials: true,
 };
