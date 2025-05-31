@@ -13,4 +13,25 @@ router.get('/', authMiddleware, async (req, res) => {
 	}
 });
 
+router.put('/:id/status', async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { status } = req.body;
+		await db.execute('UPDATE users SET status = ? WHERE id = ?', [status, id]);
+		res.json({ success: true });
+	} catch (err) {
+		res.status(500).json({ error: 'Database error', details: err });
+	}
+});
+
+router.delete('/:id', async (req, res) => {
+	try {
+		const { id } = req.params;
+		await db.execute('DELETE FROM users WHERE id = ?', [id]);
+		res.json({ success: true });
+	} catch (err) {
+		res.status(500).json({ error: 'Database error', details: err });
+	}
+});
+
 module.exports = router;

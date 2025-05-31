@@ -27,7 +27,7 @@ function reducer(state, { type, field, payload }) {
 		case ACTIONS.TOGGLE_REMEMBER:
 			return {
 				...state,
-				rememberMe: !state.rememberMe,
+				rememberMe: !state.rememberMe ? true : false,
 			};
 		case ACTIONS.SET_ERRORS:
 			return {
@@ -62,7 +62,13 @@ export const useSignInForm = () => {
 
 			localStorage.removeItem('token');
 			sessionStorage.removeItem('token');
-			state.rememberMe ? localStorage.setItem('token', res.data.token) : sessionStorage.setItem('token', res.data.token);
+
+			if (state.rememberMe) {
+				localStorage.setItem('token', res.data.token);
+			} else {
+				sessionStorage.removeItem('token');
+				sessionStorage.setItem('token', res.data.token);
+			}
 
 			dispatch({ type: ACTIONS.CLEAR_FORM });
 
