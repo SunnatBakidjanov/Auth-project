@@ -10,7 +10,7 @@ export const Register = () => {
 				<div className={styles.wrapper}>
 					<MainTitle text="THE APP" styleUsePlace={'loginUse'} />
 					<SignUpForm titleText="Sign Up for the App" btnText="Sign Up" />
-					<SignLink text="Do you already have an account?" linkText="Sign In" navigatePlace="/login" />
+					<SignLink text="Do you have an account?" styleUsePlace="signUpWrapper" linkText="Sign In" navigatePlace="/login" />
 				</div>
 			</div>
 		</section>

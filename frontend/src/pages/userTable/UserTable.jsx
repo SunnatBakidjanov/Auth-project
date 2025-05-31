@@ -40,18 +40,18 @@ export const UserTable = () => {
 
 			<table className={styles.table}>
 				<thead>
-					<tr className={styles.trContent}>
+					<tr>
 						<th className={styles.thCheckbox}>
 							<label className={styles.mainLabel} htmlFor="mainInput"></label>
 							<input id="mainInput" type="checkbox" checked={selectAll} onChange={toggleSelectAll} />
 						</th>
-						<th>
+						<th className={styles.thNameEmail}>
 							<div className={styles.thContent}>
 								<Button text={`Name`} onClick={() => sortBy('name')} styleUsePlace="tdHeadBtn" />
 								<p className={styles.tdHeadArrow}>{sortField === 'name' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}</p>
 							</div>
 						</th>
-						<th>
+						<th className={styles.thNameEmail}>
 							<div className={styles.thContent}>
 								<Button text={`Email`} onClick={() => sortBy('email')} styleUsePlace="tdHeadBtn" />
 								<p className={styles.tdHeadArrow}>{sortField === 'email' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}</p>
@@ -87,7 +87,14 @@ export const UserTable = () => {
 								<td>{user.name}</td>
 								<td>{user.email}</td>
 								<td className={styles.tdLastActive}>{user.lastActive ? getTimeAgo(user.lastActive) : '—'}</td>
-								<td className={styles.tdStatus}>{user.status}</td>
+								<td
+									className={classNames(styles.tdStatus, {
+										[styles.tdStatusActive]: user.status === 'active',
+										[styles.tdStatusBlocked]: user.status === 'blocked',
+									})}
+								>
+									{user.status}
+								</td>
 							</tr>
 						))}
 				</tbody>

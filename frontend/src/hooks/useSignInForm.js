@@ -66,7 +66,6 @@ export const useSignInForm = () => {
 			if (state.rememberMe) {
 				localStorage.setItem('token', res.data.token);
 			} else {
-				sessionStorage.removeItem('token');
 				sessionStorage.setItem('token', res.data.token);
 			}
 

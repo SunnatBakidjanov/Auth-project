@@ -74,3 +74,69 @@
 		opacity: 0.7;
 	}
 }
+
+.forgotPassword {
+	font-family: Furore, sans-serif;
+	font-size: 1em;
+	color: var(--link-font-color);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	cursor: pointer;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: #357ac9;
+		opacity: 0.7;
+	}
+}
+
+@media (width <= 768px) {
+	.signForm {
+		margin-top: 5px;
+		padding: 0.5rem 0.75rem;
+		font-size: 1em;
+	}
+
+	.link {
+		position: relative;
+		bottom: 1px;
+		font-size: 1.1em;
+	}
+
+	.forgotPassword {
+		font-size: 1em;
+	}
+
+	.tdHeadBtn {
+		padding: 0.5rem;
+		font-size: 0.9em;
+	}
+
+	.blockBtn {
+		padding: 0 0.5rem;
+		height: 40px;
+		font-size: 0.9em;
+
+		img {
+			width: 14px;
+			height: 14px;
+			object-fit: cover;
+		}
+	}
+
+	.bascketBtn {
+		margin-left: 5px;
+		padding: 0 0.5rem;
+		height: 40px;
+	}
+}
+
+@media (width <= 425px) {
+	.link {
+		font-size: 1em;
+	}
+
+	.forgotPassword {
+		font-size: 0.9em;
+	}
+}

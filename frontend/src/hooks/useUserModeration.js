@@ -22,7 +22,11 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			dispatch({ type: 'UPDATE_USER_STATUS', payload: { ids, status } });
 
 			const currentUserBlocked = ids.some(id => users.find(user => user.id === id)?.email === currentUserEmail);
-			if (currentUserBlocked) navigate('/not-found');
+			if (currentUserBlocked && status === 'blocked') {
+				navigate('/login');
+				localStorage.removeItem('token');
+				sessionStorage.removeItem('token');
+			}
 		} catch (err) {
 			console.error(`Error updating status to "${status}"`, err);
 		}
@@ -41,7 +45,11 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			dispatch({ type: 'DELETE_USERS', payload: ids });
 
 			const currentUserDeleted = ids.some(id => users.find(user => user.id === id)?.email === currentUserEmail);
-			if (currentUserDeleted) navigate('/not-found');
+			if (currentUserDeleted) {
+				navigate('/login');
+				localStorage.removeItem('token');
+				sessionStorage.removeItem('token');
+			}
 		} catch (err) {
 			console.error('Error deleting users', err);
 		}

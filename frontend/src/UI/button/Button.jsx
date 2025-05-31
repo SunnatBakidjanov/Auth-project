@@ -11,6 +11,7 @@ export const Button = ({ type, text, styleUsePlace, onClick, children }) => {
 				[styles.tdHeadBtn]: styleUsePlace === 'tdHeadBtn',
 				[styles.blockBtn]: styleUsePlace === 'blockBtn',
 				[styles.bascketBtn]: styleUsePlace === 'bascketBtn',
+				[styles.forgotPassword]: styleUsePlace === 'forgotPassword',
 			})}
 			onClick={onClick}
 		>

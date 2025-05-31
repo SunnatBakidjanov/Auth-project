@@ -18,7 +18,7 @@ const ACTIONS = {
 	CLEAR_FORM: 'CLEAR_FORM',
 };
 
-const REDIRECT_TIMER = 4000;
+const REDIRECT_TIMER = 3000;
 
 function reducer(state, { type, field, payload }) {
 	switch (type) {

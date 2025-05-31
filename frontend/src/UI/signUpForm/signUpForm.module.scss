@@ -56,3 +56,45 @@
 		color: #357ac9;
 	}
 }
+
+@media (width <= 768px) {
+	.form {
+		width: 90%;
+		gap: 0.7rem;
+	}
+
+	.error {
+		font-size: 0.9em;
+	}
+
+	.registrated {
+		font-size: 0.9em;
+	}
+
+	.title {
+		padding-bottom: 0;
+		font-size: 1.6em;
+	}
+
+	.field {
+		gap: 0.4rem;
+
+		label {
+			font-size: 0.9em;
+		}
+
+		input {
+			font-size: 0.9rem;
+		}
+	}
+}
+
+@media (width <= 425px) {
+	.title {
+		font-size: 1.3em;
+	}
+
+	.registrated {
+		font-size: 0.8em;
+	}
+}

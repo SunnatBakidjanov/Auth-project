@@ -10,7 +10,7 @@ export const Login = () => {
 				<div className={styles.wrapper}>
 					<MainTitle text="THE APP" styleUsePlace={'loginUse'} />
 					<SignInForm titleText="Sign in to the App" btnText="Sign In" />
-					<SignLink text="Don't have an account?" linkText="Sign Up" navigatePlace="/register" />
+					<SignLink text="Don't have an account?" linkText="Sign Up" navigatePlace="/register" styleUsePlace="signInWrapper" forgotPawsswordText="Forgot Password" isForogtPassword={true} />
 				</div>
 			</div>
 		</section>

@@ -1,4 +1,16 @@
-.wrapper {
+.signInWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.signUpWrapper {
+	display: flex;
+	align-items: center;
+	padding-bottom: 20px;
+}
+
+.inner {
 	display: flex;
 	align-items: center;
 	column-gap: 5px;
@@ -8,4 +20,24 @@
 	line-height: 100%;
 	font-size: 1.2em;
 	color: var(--main-font-color);
+}
+
+@media (width <= 768px) {
+	.signInWrapper {
+		display: flex;
+		row-gap: 5px;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.text {
+		font-size: 1.1em;
+	}
+}
+
+@media (width <= 425px) {
+	.text {
+		font-size: 1em;
+	}
 }
