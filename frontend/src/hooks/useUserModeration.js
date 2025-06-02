@@ -11,7 +11,7 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			await Promise.all(
 				ids.map(id =>
 					axios.put(
-						`https://frontend-production-95e5.up.railway.app/api/users/${id}/status`,
+						`https://backend-production-1b8e.up.railway.app/api/users/${id}/status`,
 						{ status },
 						{
 							headers: { Authorization: `Bearer ${token}` },
@@ -37,7 +37,7 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			const token = getToken();
 			await Promise.all(
 				ids.map(id =>
-					axios.delete(`backend-production-1b8e.up.railway.app/api/users/${id}`, {
+					axios.delete(`https://backend-production-1b8e.up.railway.app/api/users/${id}`, {
 						headers: { Authorization: `Bearer ${token}` },
 					})
 				)
