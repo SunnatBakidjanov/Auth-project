@@ -30,12 +30,29 @@ export const UserTable = () => {
 	useEffect(() => {
 		if (!users || users.length === 0 || !currentUserEmail) return;
 
-		const currentUser = users.find(user => user.email === currentUserEmail);
-		if (!currentUser || currentUser.status === 'blocked') {
-			localStorage.removeItem('token');
-			sessionStorage.removeItem('token');
-			navigate('/not-found', { replace: true });
+		const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+		if (!token) {
+			navigate('/login');
+			return;
 		}
+
+		axios
+			.get('https://backend-production-1b8e.up.railway.app/api/users/me', {
+				headers: { Authorization: `Bearer ${token}` },
+			})
+			.then(res => {
+				if (res.data.status === 'blocked') {
+					localStorage.removeItem('token');
+					sessionStorage.removeItem('token');
+					navigate('/not-found');
+				} else {
+					setCurrentUser(res.data);
+				}
+			})
+			.catch(err => {
+				console.error('Error fetching current user:', err);
+				navigate('/not-found');
+			});
 	}, [users, currentUserEmail, navigate]);
 
 	return (
