@@ -13,7 +13,7 @@ router.get('/', authMiddleware, async (req, res) => {
 	}
 });
 
-router.put('/:id/status', async (req, res) => {
+router.put('/:id/status', authMiddleware, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const { status } = req.body;
@@ -24,7 +24,7 @@ router.put('/:id/status', async (req, res) => {
 	}
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
 	try {
 		const { id } = req.params;
 		await db.execute('DELETE FROM users WHERE id = ?', [id]);
