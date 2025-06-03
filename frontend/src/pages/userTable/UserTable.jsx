@@ -28,6 +28,8 @@ export const UserTable = () => {
 	};
 
 	useEffect(() => {
+		if (!users || users.length === 0 || !currentUserEmail) return;
+
 		const currentUser = users.find(user => user.email === currentUserEmail);
 		if (!currentUser || currentUser.status === 'blocked') {
 			localStorage.removeItem('token');
