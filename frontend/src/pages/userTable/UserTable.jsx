@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './userTable.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useEffect } from 'react-router-dom';
 import { useUsers } from '../../hooks/useUsers';
 import { useUserEmail } from '../../hooks/useUserEmail';
 import { Button } from '../../UI/button/Button';
