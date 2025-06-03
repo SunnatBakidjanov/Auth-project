@@ -5,6 +5,12 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 	const getToken = () => localStorage.getItem('token') || sessionStorage.getItem('token');
 	const navigate = useNavigate();
 
+	const forceLogoutToNotFound = () => {
+		localStorage.removeItem('token');
+		sessionStorage.removeItem('token');
+		navigate('/not-found');
+	};
+
 	const updateStatus = async (ids, status) => {
 		try {
 			const token = getToken();
@@ -21,11 +27,10 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			);
 			dispatch({ type: 'UPDATE_USER_STATUS', payload: { ids, status } });
 
-			const currentUserBlocked = ids.some(id => users.find(user => user.id === id)?.email === currentUserEmail);
-			if (currentUserBlocked && status === 'blocked') {
-				navigate('/login');
-				localStorage.removeItem('token');
-				sessionStorage.removeItem('token');
+			const currentUserModified = ids.some(id => users.find(user => user.id === id)?.email === currentUserEmail);
+
+			if (currentUserModified && status === 'blocked') {
+				forceLogoutToNotFound();
 			}
 		} catch (err) {
 			console.error(`Error updating status to "${status}"`, err);
@@ -45,10 +50,9 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 			dispatch({ type: 'DELETE_USERS', payload: ids });
 
 			const currentUserDeleted = ids.some(id => users.find(user => user.id === id)?.email === currentUserEmail);
+
 			if (currentUserDeleted) {
-				navigate('/login');
-				localStorage.removeItem('token');
-				sessionStorage.removeItem('token');
+				forceLogoutToNotFound();
 			}
 		} catch (err) {
 			console.error('Error deleting users', err);
