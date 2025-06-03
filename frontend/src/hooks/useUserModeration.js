@@ -8,7 +8,7 @@ export const useUserModeration = (dispatch, currentUserEmail, users) => {
 	const forceLogoutToNotFound = () => {
 		localStorage.removeItem('token');
 		sessionStorage.removeItem('token');
-		navigate('/not-found');
+		navigate('/login');
 	};
 
 	const updateStatus = async (ids, status) => {

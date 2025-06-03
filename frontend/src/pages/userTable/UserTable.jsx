@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import styles from './userTable.module.scss';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useUsers } from '../../hooks/useUsers';
