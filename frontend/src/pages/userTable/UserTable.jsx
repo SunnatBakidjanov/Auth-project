@@ -1,8 +1,5 @@
 import classNames from 'classnames';
 import styles from './userTable.module.scss';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { useUsers } from '../../hooks/useUsers';
 import { useUserEmail } from '../../hooks/useUserEmail';
 import { Button } from '../../UI/button/Button';
@@ -14,7 +11,6 @@ import openLock from '../../../public/assets/imgs/open-lock.svg';
 import basket from '../../../public/assets/imgs/basket.svg';
 
 export const UserTable = () => {
-	const navigate = useNavigate();
 	const { users, selectedUserIds, selectAll, dispatch } = useUsers();
 	const currentUserEmail = useUserEmail();
 	const { sortBy, sortDirection, sortField } = useSortUsers(users);
@@ -27,34 +23,6 @@ export const UserTable = () => {
 	const toggleUserSelection = userId => {
 		dispatch({ type: 'TOGGLE_SELECT_ONE', payload: { id: userId } });
 	};
-
-	useEffect(() => {
-		if (!users || users.length === 0 || !currentUserEmail) return;
-
-		const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-		if (!token) {
-			navigate('/login');
-			return;
-		}
-
-		axios
-			.get('https://backend-production-1b8e.up.railway.app/api/users/me', {
-				headers: { Authorization: `Bearer ${token}` },
-			})
-			.then(res => {
-				if (res.data.status === 'blocked') {
-					localStorage.removeItem('token');
-					sessionStorage.removeItem('token');
-					navigate('/not-found');
-				} else {
-					setCurrentUser(res.data);
-				}
-			})
-			.catch(err => {
-				console.error('Error fetching current user:', err);
-				navigate('/not-found');
-			});
-	}, [users, currentUserEmail, navigate]);
 
 	return (
 		<div className={styles.wrapper}>
