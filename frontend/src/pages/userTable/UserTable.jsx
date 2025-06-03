@@ -11,6 +11,7 @@ import openLock from '../../../public/assets/imgs/open-lock.svg';
 import basket from '../../../public/assets/imgs/basket.svg';
 
 export const UserTable = () => {
+	const navigate = useNavigate();
 	const { users, selectedUserIds, selectAll, dispatch } = useUsers();
 	const currentUserEmail = useUserEmail();
 	const { sortBy, sortDirection, sortField } = useSortUsers(users);
@@ -23,6 +24,15 @@ export const UserTable = () => {
 	const toggleUserSelection = userId => {
 		dispatch({ type: 'TOGGLE_SELECT_ONE', payload: { id: userId } });
 	};
+
+	useEffect(() => {
+		const currentUser = users.find(user => user.email === currentUserEmail);
+		if (!currentUser || currentUser.status === 'blocked') {
+			localStorage.removeItem('token');
+			sessionStorage.removeItem('token');
+			navigate('/not-found', { replace: true });
+		}
+	}, [users, currentUserEmail, navigate]);
 
 	return (
 		<div className={styles.wrapper}>
